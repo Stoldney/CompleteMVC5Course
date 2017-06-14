@@ -11,7 +11,7 @@ namespace Vidly.Controllers
 {
 	public class MoviesController : Controller
 	{
-		// GET: Movies
+		#region Actions
 		public ActionResult Random()
 		{
 			var movie = new Movie() { Name = "The Matrix" };
@@ -28,7 +28,7 @@ namespace Vidly.Controllers
 				Customers = customers
 			};
 
-			return View(viewModel);			
+			return View(viewModel);
 		}
 
 		public ActionResult Edit(int id)
@@ -36,23 +36,31 @@ namespace Vidly.Controllers
 			return Content("id = " + id);
 		}
 
-		public ActionResult Index(int? pageIndex, string sortBy)
+		public ActionResult Index(int pageIndex = 1, string sortBy = "Name")
 		{
-			if (!pageIndex.HasValue)
-				pageIndex = 1;
-
-			if (string.IsNullOrEmpty(sortBy))
-				sortBy = "Name";
-
-			return Content(string.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+			var movies = GetMovies();
+			
+			return View(movies);
 		}
 
 		[Route("movies/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
 		public ActionResult ByReleaseDate(int year, int month)
 		{
 			return Content(year + "/" + month);
+		} 
+		#endregion
+
+		private IEnumerable<Movie> GetMovies()
+		{
+			var movies = new List<Movie>
+			{
+				new Movie {Id = 1, Name = "The Matrix"},
+				new Movie {Id = 2, Name = "Con Air"}
+			};
+
+			return movies;
 		}
 
-		
+
 	}
 }
