@@ -11,6 +11,6 @@ namespace Vidly.Models
 		public string Name { get; set; }
 		public bool IsSubscribedToNewsletter { get; set; }
 		public MembershipType MemberShipType { get; set; }
-		public byte MembershipId { get; set; }
+		public byte MembershipTypeId { get; set; }
 	}
 }
