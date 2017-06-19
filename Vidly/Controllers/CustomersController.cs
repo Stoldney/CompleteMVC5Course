@@ -23,6 +23,7 @@ namespace Vidly.Controllers
 			_context.Dispose();
 		}
 
+		#region Actions
 		public ViewResult Index()
 		{
 			var customers = _context.Customers.Include(c => c.MembershipType);
@@ -38,6 +39,7 @@ namespace Vidly.Controllers
 				return HttpNotFound();
 
 			return View(customer);
-		}		
+		}    
+		#endregion
 	}
 }
