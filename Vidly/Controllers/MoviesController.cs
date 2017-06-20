@@ -13,19 +13,19 @@ namespace Vidly.Controllers
 	public class MoviesController : Controller
 	{
 		#region Fields
-		private ApplicationDbContext _dbContext;
+		private ApplicationDbContext _context;
 
 		#endregion
 
 		#region Initialization and Destruction
 		public MoviesController()
 		{
-			_dbContext = new ApplicationDbContext();
+			_context = new ApplicationDbContext();
 		}
 
 		protected override void Dispose(bool disposing)
 		{
-			_dbContext.Dispose();
+			_context.Dispose();
 		}
 		#endregion
 
@@ -56,13 +56,13 @@ namespace Vidly.Controllers
 
 		public ViewResult Index(int pageIndex = 1, string sortBy = "Name")
 		{
-			var movies = _dbContext.Movies.Include(m => m.Genre);			
+			var movies = _context.Movies.Include(m => m.Genre);			
 			return View(movies);
 		}
 
 		public ActionResult Details(int id = 1)
 		{
-			var movie = _dbContext.Movies.Include(c => c.Genre)
+			var movie = _context.Movies.Include(c => c.Genre)
 						.SingleOrDefault(m => m.Id == id);
 
 			if (movie == null)
