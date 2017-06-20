@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 using Vidly.Models;
 using Vidly.ViewModels;
@@ -11,6 +12,23 @@ namespace Vidly.Controllers
 {
 	public class MoviesController : Controller
 	{
+		#region Fields
+		private ApplicationDbContext _dbContext;
+
+		#endregion
+
+		#region Initialization and Destruction
+		public MoviesController()
+		{
+			_dbContext = new ApplicationDbContext();
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			_dbContext.Dispose();
+		}
+		#endregion
+
 		#region Actions
 		public ActionResult Random()
 		{
@@ -36,11 +54,21 @@ namespace Vidly.Controllers
 			return Content("id = " + id);
 		}
 
-		public ActionResult Index(int pageIndex = 1, string sortBy = "Name")
+		public ViewResult Index(int pageIndex = 1, string sortBy = "Name")
 		{
-			var movies = GetMovies();
-			
+			var movies = _dbContext.Movies.Include(m => m.Genre);			
 			return View(movies);
+		}
+
+		public ActionResult Details(int id = 1)
+		{
+			var movie = _dbContext.Movies.Include(c => c.Genre)
+						.SingleOrDefault(m => m.Id == id);
+
+			if (movie == null)
+				return HttpNotFound();
+
+			return View(movie);
 		}
 
 		[Route("movies/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
@@ -49,18 +77,5 @@ namespace Vidly.Controllers
 			return Content(year + "/" + month);
 		} 
 		#endregion
-
-		private IEnumerable<Movie> GetMovies()
-		{
-			var movies = new List<Movie>
-			{
-				new Movie {Id = 1, Name = "The Matrix"},
-				new Movie {Id = 2, Name = "Con Air"}
-			};
-
-			return movies;
-		}
-
-
 	}
 }
