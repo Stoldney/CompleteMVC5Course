@@ -17,8 +17,8 @@ namespace Vidly.Migrations
                 .PrimaryKey(t => t.Id);
             
             AddColumn("dbo.Movies", "GenreId", c => c.Byte(nullable: false));
-            AddColumn("dbo.Movies", "ReleaseDate", c => c.DateTime(nullable: false));
-            AddColumn("dbo.Movies", "DateAdded", c => c.DateTime(nullable: false));
+            AddColumn("dbo.Movies", "ReleaseDate", c => c.DateTime());
+            AddColumn("dbo.Movies", "DateAdded", c => c.DateTime());
             AddColumn("dbo.Movies", "NumberInStock", c => c.Int(nullable: false));
             AlterColumn("dbo.Movies", "Name", c => c.String(nullable: false, maxLength: 255));
             CreateIndex("dbo.Movies", "GenreId");

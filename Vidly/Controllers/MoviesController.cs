@@ -76,6 +76,42 @@ namespace Vidly.Controllers
 		{
 			return Content(year + "/" + month);
 		} 
+
+		public ActionResult New()
+		{
+			var genres = _context.Genres;
+
+			var viewModel = new MovieFormViewModel()
+			{
+				Genres = genres
+			};
+
+			return View("MovieForm", viewModel);
+		}
+
+		[HttpPost]
+		public ActionResult Save(Movie movie)
+		{
+			if (movie.Id == 0)
+			{
+				movie.DateAdded = DateTime.Today;
+				_context.Movies.Add(movie);
+			}				
+			else
+			{
+				var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+				movieInDb.Name = movie.Name;
+				movieInDb.NumberInStock = movie.NumberInStock;
+				movieInDb.ReleaseDate = movie.ReleaseDate;
+				movieInDb.GenreId = movie.GenreId;
+				movieInDb.DateAdded = movie.DateAdded;
+			}
+
+			_context.SaveChanges();
+
+			return RedirectToAction("Index", "Movies");
+		}
+
 		#endregion
 	}
 }
