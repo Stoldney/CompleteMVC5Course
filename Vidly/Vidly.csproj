@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201706220034023_PopulateGenres.Designer.cs">
       <DependentUpon>201706220034023_PopulateGenres.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706220514362_AddXmasGenre.cs" />
+    <Compile Include="Migrations\201706220514362_AddXmasGenre.Designer.cs">
+      <DependentUpon>201706220514362_AddXmasGenre.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -374,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706220034023_PopulateGenres.resx">
       <DependentUpon>201706220034023_PopulateGenres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706220514362_AddXmasGenre.resx">
+      <DependentUpon>201706220514362_AddXmasGenre.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
