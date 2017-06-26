@@ -19,5 +19,12 @@ namespace Vidly.Models
 
 		[Required] [StringLength(255)]
 		public string Name { get; set; }
+
+		//Membership type enumerated values
+		public static readonly byte Unknown = 0;
+		public static readonly byte PayAsYouGo = 1;
+		public static readonly byte Monthly = 2;
+		public static readonly byte Quarterly = 3;
+		public static readonly byte Annual = 4;
 	}
 }
