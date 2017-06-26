@@ -28,6 +28,7 @@ namespace Vidly.Models
 		public DateTime? DateAdded { get; set; }
 
 		[Display(Name = "Number in Stock")]
+		[Range(1, 20, ErrorMessage = "Number in stock should be between 1 and 20.")]
 		public int NumberInStock { get; set; }
 		#endregion
 	}
