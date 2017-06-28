@@ -27,9 +27,7 @@ namespace Vidly.Controllers
 		#region Actions
 		public ViewResult Index()
 		{
-			var customers = _context.Customers.Include(c => c.MembershipType);
-
-			return View(customers);
+			return View();
 		}
 
 		public ActionResult Details(int id = 1)
