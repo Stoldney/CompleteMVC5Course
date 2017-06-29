@@ -9,6 +9,10 @@ namespace Vidly.Models
 		public string DrivingLicense { get; set; }
 
 		[Required]
+		[StringLength(50)]
+		public string Phone { get; set; }
+
+		[Required]
 		[EmailAddress]
 		[Display(Name = "Email")]
 		public string Email { get; set; }

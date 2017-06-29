@@ -232,6 +232,12 @@
     <Compile Include="Migrations\201706282159134_AddDrivingLicenseToApplicationUser.Designer.cs">
       <DependentUpon>201706282159134_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706290111582_AddPhoneToApplicationUser.cs" />
+    <Compile Include="Migrations\201706290111582_AddPhoneToApplicationUser.Designer.cs">
+      <DependentUpon>201706290111582_AddPhoneToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
@@ -286,7 +292,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Genre.cs" />
@@ -601,6 +606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706282159134_AddDrivingLicenseToApplicationUser.resx">
       <DependentUpon>201706282159134_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706290111582_AddPhoneToApplicationUser.resx">
+      <DependentUpon>201706290111582_AddPhoneToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
