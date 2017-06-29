@@ -63,11 +63,19 @@ namespace Vidly.Controllers
 			return View("MovieForm", viewModel);
 		}
 
-		public ViewResult Index(int pageIndex = 1, string sortBy = "Name")
+		public ViewResult Index()
 		{
-			var movies = _context.Movies.Include(m => m.Genre);			
-			return View(movies);
+			if (User.IsInRole(RoleName.CanMnageMovies))
+				return View("List");
+
+			return View("ReadOnlyList");
 		}
+
+		//public ViewResult Index(int pageIndex = 1, string sortBy = "Name")
+		//{
+		//	var movies = _context.Movies.Include(m => m.Genre);			
+		//	return View(movies);
+		//}
 
 		public ActionResult Details(int id = 1)
 		{
@@ -86,6 +94,7 @@ namespace Vidly.Controllers
 			return Content(year + "/" + month);
 		} 
 
+		[Authorize(Roles = RoleName.CanMnageMovies)]
 		public ActionResult New()
 		{
 			var genres = _context.Genres;
@@ -95,7 +104,6 @@ namespace Vidly.Controllers
 				ReleaseDate = DateTime.MinValue,
 				NumberInStock = 0				
 			};
-
 
 			var viewModel = new MovieFormViewModel(movie)
 			{
